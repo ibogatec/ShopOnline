@@ -1,0 +1,11 @@
+.vs
+[Bb]in
+[Oo]bj
+[Pp]ackages
+[Tt]emp
+[Dd]ebug
+[Rr]elease
+[Ss]eed
+node_modules
+package-lock.json
+*.user
