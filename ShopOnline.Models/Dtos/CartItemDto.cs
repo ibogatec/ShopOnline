@@ -1,4 +1,4 @@
-﻿namespace ShopOnline.Api.Models.Dtos;
+﻿namespace ShopOnline.Models.Dtos;
 
 public class CartItemDto
 {

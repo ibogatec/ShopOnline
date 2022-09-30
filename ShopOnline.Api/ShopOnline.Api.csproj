@@ -15,4 +15,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ShopOnline.Models\ShopOnline.Models.csproj" />
+  </ItemGroup>
+
 </Project>
