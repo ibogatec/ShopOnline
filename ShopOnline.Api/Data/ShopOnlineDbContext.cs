@@ -23,18 +23,18 @@ public class ShopOnlineDbContext : DbContext
         _configuration = configuration;
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public string GetDbFilePath()
     {
         var dbFileName = _configuration.GetConnectionString("SQLiteDbFile");
         var dbFileLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         var dbFilePath = Path.Join(dbFileLocation, dbFileName);
 
-        if (File.Exists(dbFilePath))
-        {
-            File.Delete(dbFilePath);
-        }
+        return dbFilePath;
+    }
 
-        optionsBuilder.UseSqlite($"Data Source={dbFilePath}");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlite($"Data Source={GetDbFilePath()}");
     }
 
 }

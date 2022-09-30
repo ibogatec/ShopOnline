@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ShopOnline.Api.Models.Entities;
 
 namespace ShopOnline.Api.Data;
@@ -12,7 +12,8 @@ public class ShopOnlineSeeder
     private readonly IReadOnlyList<Cart> _carts;
     private readonly IReadOnlyList<ProductCategory> _productCategories;
 
-    public ShopOnlineSeeder(ShopOnlineDbContext dbContext)
+    public ShopOnlineSeeder(
+        ShopOnlineDbContext dbContext)
     {
         _dbContext = dbContext;
 
@@ -268,9 +269,14 @@ public class ShopOnlineSeeder
 
         if (seed)
         {
+            var dbFilePath = _dbContext.GetDbFilePath();
+            if (File.Exists(dbFilePath))
+            {
+                File.Delete(dbFilePath);
+            }
+
             _dbContext.Database.EnsureDeleted();
             _dbContext.Database.Migrate();
-            _dbContext.Database.EnsureCreated();
 
             _dbContext.AddRange(_products);
             _dbContext.AddRange(_productCategories);
