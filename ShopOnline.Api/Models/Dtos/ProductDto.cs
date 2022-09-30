@@ -1,6 +1,6 @@
-﻿namespace ShopOnline.Api.Models.Entities;
+﻿namespace ShopOnline.Api.Models.Dtos;
 
-public class Product
+public class ProductDto
 {
     public int Id { get; set; }
 
@@ -14,8 +14,8 @@ public class Product
 
     public int Qty { get; set; }
 
-    public int? ProductCategoryId { get; set; }
+    public int ProductCategoryId { get; set; }
 
-    public ProductCategory? ProductCategory { get; set; }
+    public string ProductCategoryName { get; set; } = string.Empty;
 
 }
