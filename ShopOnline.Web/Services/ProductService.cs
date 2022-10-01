@@ -25,4 +25,26 @@ public class ProductService : IProductService
             throw;
         }
     }
+
+    public async Task<ProductDto> GetProductById(int id)
+    {
+        try
+        {
+            var respnse = await _httpClient.GetAsync($"api/products/{id}");
+
+            if (respnse.IsSuccessStatusCode)
+            {
+                return await respnse.Content.ReadFromJsonAsync<ProductDto>() ?? new ProductDto();
+            }
+            else
+            {
+                var message = await respnse.Content.ReadAsStringAsync();
+                throw new Exception(message);
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
 }

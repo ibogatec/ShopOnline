@@ -38,4 +38,24 @@ public class ProductsController : ControllerBase
 			return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 		}
 	}
+
+	[HttpGet("{id:int}")]
+	public async Task<ActionResult<ProductDto>> GetById(int id)
+	{
+		try
+		{
+			var product = await _productRepo.GetById(id);
+			if(product == null)
+			{
+				return NotFound($"Product with id '{id}' was not found");
+			}
+
+			return Ok(_mapper.Map<ProductDto>(product));
+		}
+		catch (Exception ex)
+		{
+			return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+		}
+	}
+
 }
