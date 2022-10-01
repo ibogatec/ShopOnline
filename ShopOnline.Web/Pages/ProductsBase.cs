@@ -19,7 +19,7 @@ public class ProductsBase : ComponentBase
             return;
         }
 
-        Products = await ProductService.GetProducts();
+        Products = await ProductService.GetProductsAsync();
     }
 
     protected IOrderedEnumerable<IGrouping<string, ProductDto>>? GetProductsGroupedByCategory()

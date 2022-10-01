@@ -4,7 +4,7 @@ namespace ShopOnline.Web.Services;
 
 public interface IProductService
 {
-    Task<IReadOnlyList<ProductDto>> GetProducts();
+    Task<IReadOnlyList<ProductDto>> GetProductsAsync();
 
-    Task<ProductDto> GetProductById(int id);
+    Task<ProductDto> GetProductByIdAsync(int id);
 }

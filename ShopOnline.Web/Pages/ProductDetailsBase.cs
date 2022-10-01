@@ -50,7 +50,7 @@ public class ProductDetailsBase : ComponentBase
                 return;
             }
 
-            Product = await ProductService.GetProductById(Id);
+            Product = await ProductService.GetProductByIdAsync(Id);
         }
         catch (Exception ex)
         {

@@ -1,25 +1,34 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using ShopOnline.Api.Data;
-using ShopOnline.Api.Models.Entities;
+using ShopOnline.Models.Dtos;
 
 namespace ShopOnline.Api.Repositories;
 
 public class ProductRepository
 {
+	private readonly IMapper _mapper;
 	private readonly ShopOnlineDbContext _dbContext;
 
-	public ProductRepository(ShopOnlineDbContext dbContext)
+	public ProductRepository(
+		IMapper mapper,
+		ShopOnlineDbContext dbContext)
 	{
+		_mapper = mapper;
 		_dbContext = dbContext;
 	}
 
-	public async Task<IReadOnlyList<Product>> GetAllAsync()
+	public async Task<IReadOnlyList<ProductDto>> GetAllAsync()
 	{
-		return await _dbContext.Products.Include(p => p.ProductCategory).ToListAsync();
+		var products = await _dbContext.Products.Include(p => p.ProductCategory).ToListAsync();
+
+		return _mapper.Map<IReadOnlyList<ProductDto>>(products);
     }
 
-	public async Task<Product> GetById(int id)
+	public async Task<ProductDto> GetByIdAsync(int id)
 	{
-		return await _dbContext.Products.Include(p => p.ProductCategory).FirstAsync(p => p.Id == id);
+		var product =  await _dbContext.Products.Include(p => p.ProductCategory).FirstAsync(p => p.Id == id);
+
+		return _mapper.Map<ProductDto>(product);
 	}
 }

@@ -45,9 +45,8 @@ public class ShoppingCartRepository
         if (cartItem != null)
         {
             cartItem.Qty = newQty;
+            await _dbContext.SaveChangesAsync();
         }
-
-        await _dbContext.SaveChangesAsync();
 
         return _mapper.Map<CartItemDto>(cartItem);
     }
@@ -59,9 +58,8 @@ public class ShoppingCartRepository
         if (cartItem != null)
         {
             _dbContext.CartItems.Remove(cartItem);
+            await _dbContext.SaveChangesAsync();
         }
-
-        await _dbContext.SaveChangesAsync();
 
         return _mapper.Map<CartItemDto>(cartItem);
     }

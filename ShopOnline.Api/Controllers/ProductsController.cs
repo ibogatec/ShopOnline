@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ShopOnline.Api.Repositories;
 using ShopOnline.Models.Dtos;
 
@@ -9,19 +8,15 @@ namespace ShopOnline.Api.Controllers;
 [ApiController]
 public class ProductsController : ControllerBase
 {
-	private readonly IMapper _mapper;
 	private readonly ProductRepository _productRepo;
 
-	public ProductsController(
-		IMapper mapper,
-		ProductRepository productRepo)
+	public ProductsController(ProductRepository productRepo)
 	{
-		_mapper = mapper;
 		_productRepo = productRepo;
 	}
 
 	[HttpGet]
-	public async Task<ActionResult<IReadOnlyList<ProductDto>>> Get()
+	public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetProductsAsync()
 	{
 		try
 		{
@@ -31,7 +26,7 @@ public class ProductsController : ControllerBase
 				return NotFound("Products are not found");
 			}
 
-			return Ok(_mapper.Map<IReadOnlyList<ProductDto>>(products));
+			return Ok(products);
 		}
 		catch (Exception ex)
 		{
@@ -39,18 +34,18 @@ public class ProductsController : ControllerBase
 		}
 	}
 
-	[HttpGet("{id:int}")]
-	public async Task<ActionResult<ProductDto>> GetById(int id)
+	[HttpGet("{productId:int}")]
+	public async Task<ActionResult<ProductDto>> GetProductByIdAsync(int productId)
 	{
 		try
 		{
-			var product = await _productRepo.GetById(id);
+			var product = await _productRepo.GetByIdAsync(productId);
 			if(product == null)
 			{
-				return NotFound($"Product with id '{id}' was not found");
+				return NotFound($"Product with id '{productId}' was not found");
 			}
 
-			return Ok(_mapper.Map<ProductDto>(product));
+			return Ok(product);
 		}
 		catch (Exception ex)
 		{

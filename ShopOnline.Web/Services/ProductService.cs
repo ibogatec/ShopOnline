@@ -12,7 +12,7 @@ public class ProductService : IProductService
         _httpClient = httpClient;
     }
 
-    public async Task<IReadOnlyList<ProductDto>> GetProducts()
+    public async Task<IReadOnlyList<ProductDto>> GetProductsAsync()
     {
         try
         {
@@ -26,7 +26,7 @@ public class ProductService : IProductService
         }
     }
 
-    public async Task<ProductDto> GetProductById(int id)
+    public async Task<ProductDto> GetProductByIdAsync(int id)
     {
         try
         {
