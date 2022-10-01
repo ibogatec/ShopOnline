@@ -53,7 +53,7 @@ public class ShoppingCartRepository
 
     public async Task<CartItemDto> DeleteItemAsync(int id)
     {
-        var cartItem = await _dbContext.CartItems.FindAsync(id);
+        var cartItem = await _dbContext.CartItems.Include(i => i.Product).FirstAsync(i => i.Id == id);
 
         if (cartItem != null)
         {

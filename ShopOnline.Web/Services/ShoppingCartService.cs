@@ -20,6 +20,11 @@ public class ShoppingCartService : IShoppingCartService
 
             if (response.IsSuccessStatusCode)
             {
+                if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    return new CartItemDto();
+                }
+
                 return await response.Content.ReadFromJsonAsync<CartItemDto>() ?? new CartItemDto();
             }
 
@@ -40,7 +45,37 @@ public class ShoppingCartService : IShoppingCartService
 
             if (response.IsSuccessStatusCode)
             {
+                if(response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    return new List<CartItemDto>();
+                }
+
                 return await response.Content.ReadFromJsonAsync<IReadOnlyList<CartItemDto>>() ?? new List<CartItemDto>();
+            }
+
+            var message = await response.Content.ReadAsStringAsync();
+            throw new Exception($"Http status: {response.StatusCode}, Message: {message}");
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    public async Task<CartItemDto> DeleteItemAsync(int itemId)
+    {
+        try
+        {
+            var response = await _httpClient.DeleteAsync($"api/ShoppingCart/{itemId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    return new CartItemDto();
+                }
+
+                return await response.Content.ReadFromJsonAsync<CartItemDto>() ?? new CartItemDto();
             }
 
             var message = await response.Content.ReadAsStringAsync();

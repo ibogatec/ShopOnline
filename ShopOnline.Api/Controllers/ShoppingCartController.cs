@@ -76,4 +76,25 @@ public class ShoppingCartController : ControllerBase
         }
     }
 
+    [HttpDelete("{itemId:int}")]
+    public async Task<ActionResult<CartItemDto>> DeleteItemAsync(int itemId)
+    {
+        try
+        {
+            var deletedItem = await _shoppingCartRepo.DeleteItemAsync(itemId);
+            if (deletedItem == null)
+            {
+                return NotFound($"Item with id '{itemId}' was not found.");
+            }
+
+            return Ok(deletedItem);
+        }
+        catch (Exception ex)
+        {
+            var message = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+
+            return StatusCode(StatusCodes.Status500InternalServerError, message);
+        }
+    }
+
 }

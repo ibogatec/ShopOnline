@@ -30,17 +30,20 @@ public class ProductService : IProductService
     {
         try
         {
-            var respnse = await _httpClient.GetAsync($"api/products/{id}");
+            var response = await _httpClient.GetAsync($"api/products/{id}");
 
-            if (respnse.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
-                return await respnse.Content.ReadFromJsonAsync<ProductDto>() ?? new ProductDto();
+                if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    return new ProductDto();
+                }
+
+                return await response.Content.ReadFromJsonAsync<ProductDto>() ?? new ProductDto();
             }
-            else
-            {
-                var message = await respnse.Content.ReadAsStringAsync();
-                throw new Exception(message);
-            }
+
+            var message = await response.Content.ReadAsStringAsync();
+            throw new Exception($"Http status: {response.StatusCode}, Message: {message}");
         }
         catch (Exception)
         {
