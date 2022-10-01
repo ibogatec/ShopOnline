@@ -10,6 +10,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddDbContext<ShopOnlineDbContext>();
         services.AddScoped<ProductRepository>();
+        services.AddScoped<ShoppingCartRepository>();
         services.AddScoped<ShopOnlineSeeder>();
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
     }
