@@ -31,4 +31,11 @@ public class ProductRepository
 
 		return _mapper.Map<ProductDto>(product);
 	}
+
+	public async Task<IReadOnlyList<ProductCategoryDto>> GetAllProductCategoriesAsync()
+	{
+		var categories = await _dbContext.ProductCategories.ToListAsync();
+
+		return _mapper.Map<IReadOnlyList<ProductCategoryDto>>(categories);
+	}
 }

@@ -1,0 +1,24 @@
+﻿@inherits ProductCategoriesNavMenuBase
+
+@if (ProductCategories == null && ErrorMessage == null)
+{
+    <p class="text-white m-md-3">Loading product categories...</p>
+    <DisplaySpinner />
+}
+else if (ErrorMessage != null)
+{
+    <DisplayError ErrorMessage=@ErrorMessage></DisplayError>
+}
+else if (ProductCategories != null && ErrorMessage == null)
+{
+    @foreach(var productCategory in ProductCategories)
+    {
+        var link = $"/products/categories/{productCategory.Id}";
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="@link">
+                <span class="@productCategory.IconCss mb-1"></span>&nbsp;&nbsp;&nbsp;@productCategory.Name
+            </NavLink>
+        </div>
+    }
+}

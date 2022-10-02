@@ -53,4 +53,24 @@ public class ProductsController : ControllerBase
 		}
 	}
 
+	[HttpGet("categories")]
+	public async Task<ActionResult<IReadOnlyList<ProductCategoryDto>>> GetProductCategories()
+	{
+		try
+		{
+			var categories = await _productRepo.GetAllProductCategoriesAsync();
+
+			if (categories == null)
+			{
+				return NotFound("Product Categories are not found.");
+			}
+
+			return Ok(categories);
+
+		}
+		catch (Exception ex)
+		{
+			return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+		}
+	}
 }
