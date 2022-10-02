@@ -9,4 +9,7 @@ public interface IProductService
     Task<ProductDto> GetProductByIdAsync(int id);
 
     Task<IReadOnlyList<ProductCategoryDto>> GetProductCategoriesAsync();
+
+    Task<IReadOnlyList<ProductDto>> GetProductsByCategoryAsync(int categoryId);
+
 }

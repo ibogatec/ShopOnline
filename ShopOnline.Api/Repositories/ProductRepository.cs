@@ -38,4 +38,11 @@ public class ProductRepository
 
 		return _mapper.Map<IReadOnlyList<ProductCategoryDto>>(categories);
 	}
+
+    public async Task<IReadOnlyList<ProductDto>> GetProductsByCategoryAsync(int categoryId)
+    {
+		var products = await _dbContext.Products.Include(p => p.ProductCategory).Where(p => p.ProductCategoryId == categoryId).ToListAsync();
+		
+		return _mapper.Map<IReadOnlyList<ProductDto>>(products);
+	}
 }

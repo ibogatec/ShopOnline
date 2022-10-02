@@ -57,8 +57,6 @@ public class ProductService : IProductService
         {
             var response = await _httpClient.GetAsync($"api/products/categories");
 
-            Thread.Sleep(3000);
-
             if (response.IsSuccessStatusCode)
             {
                 if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
@@ -77,4 +75,30 @@ public class ProductService : IProductService
             throw;
         }
     }
+
+    public async Task<IReadOnlyList<ProductDto>> GetProductsByCategoryAsync(int categoryId)
+    {
+        try
+        {
+            var response = await _httpClient.GetAsync($"api/products/categories/{categoryId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    return new List<ProductDto>();
+                }
+
+                return await response.Content.ReadFromJsonAsync<IReadOnlyList<ProductDto>>() ?? new List<ProductDto>();
+            }
+
+            var message = await response.Content.ReadAsStringAsync();
+            throw new Exception($"Http status: {response.StatusCode}, Message: {message}");
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
 }

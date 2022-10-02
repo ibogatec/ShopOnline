@@ -73,4 +73,32 @@ public class ProductsController : ControllerBase
 			return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 		}
 	}
+
+    [HttpGet("categories/{categoryId:int}")]
+    public async Task<ActionResult<IReadOnlyList<ProductCategoryDto>>> GetProductsByCategoryAsync(int categoryId)
+    {
+        try
+        {
+            var products = await _productRepo.GetProductsByCategoryAsync(categoryId);
+
+            if (products == null)
+            {
+                return NotFound($"Products with categoryId '{categoryId}' are not found.");
+            }
+
+            return Ok(products);
+
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
+    }
+
+
+
+
+
+
+
 }
