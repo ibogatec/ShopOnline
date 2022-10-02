@@ -26,7 +26,11 @@ else if (ShoppingCartItems != null && ErrorMessage == null)
                         <div class="col-md-8">
                             <h5>@item.ProductName</h5>
                             <div class="mb-4">@item.ProductDescription</div>
-                            <span>Price: <b>@item.ProductPrice.ToString("C")</b></span>
+                            <span>
+                                Price: <b>@item.ProductPrice.ToString("C")</b>
+                                <input type="number" @bind="@item.Qty" @oninput = "() => ChangeQty(item.Id)">
+                                <button id="updateQty-@item.Id" class="btn btn-info btn-sm update-qty" @onclick="() => UpdateQtyAsync(item.Id, item.Qty)">Update Qty</button>
+                            </span>
                             <div>
                                 <button class="btn btn-danger" title="Remove from Cart" @onclick="() => DeleteItemAsync(item.Id)"><i class="fas fa-trash"></i></button>
                             </div>
@@ -37,7 +41,7 @@ else if (ShoppingCartItems != null && ErrorMessage == null)
             <div class="col-md-3">
                 <h5>Cart Summary</h5>
                 <div class="mt-2">
-                    <div>Total - </div>
+                    <div>Total: <b>@TotalPrice</b> (@TotalQuantity items)</div>
                     <a href="#" class="btn btn-success">
                         <span class="oi oi-credit-card"></span>&nbsp;&nbsp;Proceed to Checkout
                     </a>

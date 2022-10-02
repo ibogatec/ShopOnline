@@ -1,5 +1,6 @@
 ﻿using ShopOnline.Models.Dtos;
 using System.Net.Http.Json;
+using System.Text;
 
 namespace ShopOnline.Web.Services;
 
@@ -86,4 +87,34 @@ public class ShoppingCartService : IShoppingCartService
             throw;
         }
     }
+
+    public async Task<CartItemDto> UpdateQtyAsync(int itemId, int newQty)
+    {
+        try
+        {
+            var content = new StringContent(newQty.ToString(), Encoding.UTF8, "application/json-patch+json");
+
+            var response = await _httpClient.PatchAsync($"api/ShoppingCart/{itemId}", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    return new CartItemDto();
+                }
+
+                return await response.Content.ReadFromJsonAsync<CartItemDto>() ?? new CartItemDto();
+            }
+
+            var message = await response.Content.ReadAsStringAsync();
+            throw new Exception($"Http status: {response.StatusCode}, Message: {message}");
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+
+    }
+
+
 }

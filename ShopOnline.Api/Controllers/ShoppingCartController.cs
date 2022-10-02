@@ -97,4 +97,26 @@ public class ShoppingCartController : ControllerBase
         }
     }
 
+    [HttpPatch("{itemId:int}")]
+    public async Task<ActionResult<CartItemDto>> UpdateQtyAsync(int itemId, [FromBody] int newQty)
+    {
+        try
+        {
+            var updatedItem = await _shoppingCartRepo.UpdateItemQtyAsync(itemId, newQty);
+
+            if (updatedItem == null)
+            {
+                return NotFound($"Item with id '{itemId}' was not found.");
+            }
+
+            return Ok(updatedItem);
+        }
+        catch (Exception ex)
+        {
+            var message = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+
+            return StatusCode(StatusCodes.Status500InternalServerError, message);
+        }
+
+    }
 }
