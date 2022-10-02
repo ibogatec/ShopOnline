@@ -258,10 +258,10 @@ public class ShopOnlineSeeder
 
     public IReadOnlyList<ProductCategory> GetProductCategories() => new List<ProductCategory>
     {
-        new ProductCategory { Name = "Beauty" },
-        new ProductCategory { Name = "Furniture" },
-        new ProductCategory { Name = "Electronics" },
-        new ProductCategory { Name = "Shoes" }
+        new ProductCategory { Name = "Beauty", IconCss = "fas fa-spa" },
+        new ProductCategory { Name = "Furniture", IconCss = "fas fa-couch" },
+        new ProductCategory { Name = "Electronics", IconCss = "fas fa-headphones" },
+        new ProductCategory { Name = "Shoes", IconCss = "fas fa-shoe-prints"}
     };
 
     public void SeedInitialData(bool seed)
