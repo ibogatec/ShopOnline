@@ -12,6 +12,7 @@ public class MappingProfile : Profile
 			.ReverseMap();
 
 		CreateMap<CartItem, CartItemDto>()
+			.ForMember(m => m.TotalPrice, conf => conf.MapFrom(m => m.Qty * (m.Product != null ? m.Product.Price : 0)))
 			.ReverseMap();
 	}
 
