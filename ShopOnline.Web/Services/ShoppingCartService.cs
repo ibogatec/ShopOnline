@@ -1,4 +1,4 @@
-﻿using ShopOnline.Models.Dtos;
+using ShopOnline.Models.Dtos;
 using System.Net.Http.Json;
 using System.Text;
 
@@ -7,6 +7,8 @@ namespace ShopOnline.Web.Services;
 public class ShoppingCartService : IShoppingCartService
 {
     private readonly HttpClient _httpClient;
+
+    public event Action<int>? ShoppingCartChanged;
 
     public ShoppingCartService(HttpClient httpClient)
     {
@@ -116,5 +118,8 @@ public class ShoppingCartService : IShoppingCartService
 
     }
 
-
+    public virtual void OnShopingCartChanged(int totalQty)
+    {
+        ShoppingCartChanged?.Invoke(totalQty);
+    }
 }

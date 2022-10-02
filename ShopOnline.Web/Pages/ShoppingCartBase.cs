@@ -109,5 +109,7 @@ public class ShoppingCartBase : ComponentBase
         TotalPrice = ShoppingCartItems != null ? ShoppingCartItems.Sum(i => i.ProductPrice * i.Qty).ToString("C") : $"{0.0:C}";
 
         TotalQuantity = ShoppingCartItems != null ? ShoppingCartItems.Sum(i => i.Qty) : 0;
+
+		ShoppingCartService?.OnShopingCartChanged(TotalQuantity);
     }
 }
