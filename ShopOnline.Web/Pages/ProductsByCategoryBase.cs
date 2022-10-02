@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using ShopOnline.Models.Dtos;
+using ShopOnline.Web.Models.ViewModels;
 using ShopOnline.Web.Services;
 
 namespace ShopOnline.Web.Pages;
@@ -15,7 +15,7 @@ public class ProductsByCategoryBase : ComponentBase
 
     public string? CategoryName { get; set; }
 
-    public IReadOnlyList<ProductDto>? Products { get; set; }
+    public IReadOnlyList<ProductViewModel>? Products { get; set; }
 
     public string? ErrorMessage { get; set; }
 

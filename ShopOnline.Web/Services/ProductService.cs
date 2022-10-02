@@ -1,4 +1,4 @@
-﻿using ShopOnline.Models.Dtos;
+﻿using ShopOnline.Web.Models.ViewModels;
 using System.Net.Http.Json;
 
 namespace ShopOnline.Web.Services;
@@ -12,11 +12,11 @@ public class ProductService : IProductService
         _httpClient = httpClient;
     }
 
-    public async Task<IReadOnlyList<ProductDto>> GetProductsAsync()
+    public async Task<IReadOnlyList<ProductViewModel>> GetProductsAsync()
     {
         try
         {
-            var products = await _httpClient.GetFromJsonAsync<IReadOnlyList<ProductDto>>("api/products") ?? new List<ProductDto>();
+            var products = await _httpClient.GetFromJsonAsync<IReadOnlyList<ProductViewModel>>("api/products") ?? new List<ProductViewModel>();
 
             return products;
         }
@@ -26,7 +26,7 @@ public class ProductService : IProductService
         }
     }
 
-    public async Task<ProductDto> GetProductByIdAsync(int id)
+    public async Task<ProductViewModel> GetProductByIdAsync(int id)
     {
         try
         {
@@ -36,10 +36,10 @@ public class ProductService : IProductService
             {
                 if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                 {
-                    return new ProductDto();
+                    return new ProductViewModel();
                 }
 
-                return await response.Content.ReadFromJsonAsync<ProductDto>() ?? new ProductDto();
+                return await response.Content.ReadFromJsonAsync<ProductViewModel>() ?? new ProductViewModel();
             }
 
             var message = await response.Content.ReadAsStringAsync();
@@ -51,7 +51,7 @@ public class ProductService : IProductService
         }
     }
 
-    public async Task<IReadOnlyList<ProductCategoryDto>> GetProductCategoriesAsync()
+    public async Task<IReadOnlyList<ProductCategoryViewModel>> GetProductCategoriesAsync()
     {
         try
         {
@@ -61,10 +61,10 @@ public class ProductService : IProductService
             {
                 if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                 {
-                    return new List<ProductCategoryDto>();
+                    return new List<ProductCategoryViewModel>();
                 }
 
-                return await response.Content.ReadFromJsonAsync<IReadOnlyList<ProductCategoryDto>>() ?? new List<ProductCategoryDto>();
+                return await response.Content.ReadFromJsonAsync<IReadOnlyList<ProductCategoryViewModel>>() ?? new List<ProductCategoryViewModel>();
             }
 
             var message = await response.Content.ReadAsStringAsync();
@@ -76,7 +76,7 @@ public class ProductService : IProductService
         }
     }
 
-    public async Task<IReadOnlyList<ProductDto>> GetProductsByCategoryAsync(int categoryId)
+    public async Task<IReadOnlyList<ProductViewModel>> GetProductsByCategoryAsync(int categoryId)
     {
         try
         {
@@ -86,10 +86,10 @@ public class ProductService : IProductService
             {
                 if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                 {
-                    return new List<ProductDto>();
+                    return new List<ProductViewModel>();
                 }
 
-                return await response.Content.ReadFromJsonAsync<IReadOnlyList<ProductDto>>() ?? new List<ProductDto>();
+                return await response.Content.ReadFromJsonAsync<IReadOnlyList<ProductViewModel>>() ?? new List<ProductViewModel>();
             }
 
             var message = await response.Content.ReadAsStringAsync();

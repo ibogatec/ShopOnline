@@ -1,15 +1,15 @@
-﻿using ShopOnline.Models.Dtos;
+﻿using ShopOnline.Web.Models.ViewModels;
 
 namespace ShopOnline.Web.Services;
 
 public interface IProductService
 {
-    Task<IReadOnlyList<ProductDto>> GetProductsAsync();
+    Task<IReadOnlyList<ProductViewModel>> GetProductsAsync();
 
-    Task<ProductDto> GetProductByIdAsync(int id);
+    Task<ProductViewModel> GetProductByIdAsync(int id);
 
-    Task<IReadOnlyList<ProductCategoryDto>> GetProductCategoriesAsync();
+    Task<IReadOnlyList<ProductCategoryViewModel>> GetProductCategoriesAsync();
 
-    Task<IReadOnlyList<ProductDto>> GetProductsByCategoryAsync(int categoryId);
+    Task<IReadOnlyList<ProductViewModel>> GetProductsByCategoryAsync(int categoryId);
 
 }

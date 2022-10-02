@@ -1,6 +1,6 @@
-﻿namespace ShopOnline.Models.Dtos;
+﻿namespace ShopOnline.Web.Models.ViewModels;
 
-public class ProductCategoryDto
+public class ProductCategoryViewModel
 {
     public int Id { get; set; }
 

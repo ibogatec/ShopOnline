@@ -23,7 +23,7 @@ else if (Product != null && ErrorMessage == null)
             <p class="mb-4"><b>@Product.Price.ToString("C")&nbsp;(@Product.Qty items in stock)</b></p>
             <div>
                 <button class="btn btn-success p-3"
-                        @onclick="() => AddToCartAsync(new CartItemDto
+                        @onclick="() => AddToCartAsync(new CartItemViewModel
                         {
                             CartId = 1,
                             ProductId = Product.Id,

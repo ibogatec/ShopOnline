@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using ShopOnline.Api.Data;
+using ShopOnline.Api.Models.Dtos;
 using ShopOnline.Api.Models.Entities;
-using ShopOnline.Models.Dtos;
 
 namespace ShopOnline.Api.Repositories;
 

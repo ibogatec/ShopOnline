@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using ShopOnline.Models.Dtos;
+using ShopOnline.Web.Models.ViewModels;
 using ShopOnline.Web.Services;
 
 namespace ShopOnline.Web.Pages;
@@ -13,7 +13,7 @@ public class ShoppingCartBase : ComponentBase
     [Inject]
     public IShoppingCartService? ShoppingCartService { get; set; }
 
-    public IList<CartItemDto>? ShoppingCartItems { get; set; }
+    public IList<CartItemViewModel>? ShoppingCartItems { get; set; }
 
 	public string? TotalPrice { get; set; }
 

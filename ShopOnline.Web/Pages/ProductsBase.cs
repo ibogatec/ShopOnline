@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using ShopOnline.Models.Dtos;
+using ShopOnline.Web.Models.ViewModels;
 using ShopOnline.Web.Services;
 
 namespace ShopOnline.Web.Pages;
@@ -13,7 +13,7 @@ public class ProductsBase : ComponentBase
     [Inject]
     public IShoppingCartService? ShoppingCartService { get; set; }
 
-    public IReadOnlyList<ProductDto>? Products { get; set; }
+    public IReadOnlyList<ProductViewModel>? Products { get; set; }
 
     public string? ErrorMessage { get; set; }
 
@@ -42,7 +42,7 @@ public class ProductsBase : ComponentBase
         }
     }
 
-    protected IOrderedEnumerable<IGrouping<string, ProductDto>>? GetProductsGroupedByCategory()
+    protected IOrderedEnumerable<IGrouping<string, ProductViewModel>>? GetProductsGroupedByCategory()
     {
         return Products?.GroupBy(p => p.ProductCategoryName).OrderBy(p => p.Key);
     }

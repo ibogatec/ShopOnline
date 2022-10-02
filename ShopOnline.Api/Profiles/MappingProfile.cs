@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using ShopOnline.Api.Models.Dtos;
 using ShopOnline.Api.Models.Entities;
-using ShopOnline.Models.Dtos;
 
 namespace ShopOnline.Api.Profiles;
 

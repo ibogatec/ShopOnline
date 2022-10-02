@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using ShopOnline.Models.Dtos;
+using ShopOnline.Web.Models.ViewModels;
 using ShopOnline.Web.Services;
 
 namespace ShopOnline.Web.Pages;
@@ -18,11 +18,11 @@ public class ProductDetailsBase : ComponentBase
     [Parameter]
     public int Id { get; set; }
 
-    public ProductDto? Product { get; set; }
+    public ProductViewModel? Product { get; set; }
 
     public string? ErrorMessage { get; set; }
 
-    protected async Task AddToCartAsync(CartItemDto cartItem)
+    protected async Task AddToCartAsync(CartItemViewModel cartItem)
     {
         try
         {

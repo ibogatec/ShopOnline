@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using ShopOnline.Api.Data;
-using ShopOnline.Models.Dtos;
+using ShopOnline.Api.Models.Dtos;
 
 namespace ShopOnline.Api.Repositories;
 

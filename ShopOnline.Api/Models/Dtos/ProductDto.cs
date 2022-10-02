@@ -1,4 +1,4 @@
-﻿namespace ShopOnline.Models.Dtos;
+﻿namespace ShopOnline.Api.Models.Dtos;
 
 public class ProductDto
 {

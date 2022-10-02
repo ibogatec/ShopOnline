@@ -1,16 +1,16 @@
-using ShopOnline.Models.Dtos;
+using ShopOnline.Web.Models.ViewModels;
 
 namespace ShopOnline.Web.Services;
 
 public interface IShoppingCartService
 {
-    Task<IReadOnlyList<CartItemDto>> GetUserItemsAsync(int userId);
+    Task<IReadOnlyList<CartItemViewModel>> GetUserItemsAsync(int userId);
 
-    Task<CartItemDto> AddItemAsync(CartItemDto cartItemDto);
+    Task<CartItemViewModel> AddItemAsync(CartItemViewModel cartItemDto);
 
-    Task<CartItemDto> DeleteItemAsync(int itemId);
+    Task<CartItemViewModel> DeleteItemAsync(int itemId);
 
-    Task<CartItemDto> UpdateQtyAsync(int itemId, int newQty);
+    Task<CartItemViewModel> UpdateQtyAsync(int itemId, int newQty);
 
     event Action<int>? ShoppingCartChanged;
 

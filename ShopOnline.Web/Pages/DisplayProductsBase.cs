@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
-using ShopOnline.Models.Dtos;
+using ShopOnline.Web.Models.ViewModels;
 
 namespace ShopOnline.Web.Pages;
 
 public class DisplayProductsBase : ComponentBase
 {
     [Parameter]
-    public IReadOnlyList<ProductDto>? Products { get; set; }
+    public IReadOnlyList<ProductViewModel>? Products { get; set; }
 }

@@ -1,4 +1,4 @@
-using ShopOnline.Models.Dtos;
+using ShopOnline.Web.Models.ViewModels;
 using System.Net.Http.Json;
 using System.Text;
 
@@ -15,7 +15,7 @@ public class ShoppingCartService : IShoppingCartService
         _httpClient = httpClient;
     }
 
-    public async Task<CartItemDto> AddItemAsync(CartItemDto cartItemDto)
+    public async Task<CartItemViewModel> AddItemAsync(CartItemViewModel cartItemDto)
     {
         try
         {
@@ -25,10 +25,10 @@ public class ShoppingCartService : IShoppingCartService
             {
                 if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                 {
-                    return new CartItemDto();
+                    return new CartItemViewModel();
                 }
 
-                return await response.Content.ReadFromJsonAsync<CartItemDto>() ?? new CartItemDto();
+                return await response.Content.ReadFromJsonAsync<CartItemViewModel>() ?? new CartItemViewModel();
             }
 
             var message = await response.Content.ReadAsStringAsync();
@@ -40,7 +40,7 @@ public class ShoppingCartService : IShoppingCartService
         }
     }
 
-    public async Task<IReadOnlyList<CartItemDto>> GetUserItemsAsync(int userId)
+    public async Task<IReadOnlyList<CartItemViewModel>> GetUserItemsAsync(int userId)
     {
         try
         {
@@ -50,10 +50,10 @@ public class ShoppingCartService : IShoppingCartService
             {
                 if(response.StatusCode == System.Net.HttpStatusCode.NoContent)
                 {
-                    return new List<CartItemDto>();
+                    return new List<CartItemViewModel>();
                 }
 
-                return await response.Content.ReadFromJsonAsync<IReadOnlyList<CartItemDto>>() ?? new List<CartItemDto>();
+                return await response.Content.ReadFromJsonAsync<IReadOnlyList<CartItemViewModel>>() ?? new List<CartItemViewModel>();
             }
 
             var message = await response.Content.ReadAsStringAsync();
@@ -65,7 +65,7 @@ public class ShoppingCartService : IShoppingCartService
         }
     }
 
-    public async Task<CartItemDto> DeleteItemAsync(int itemId)
+    public async Task<CartItemViewModel> DeleteItemAsync(int itemId)
     {
         try
         {
@@ -75,10 +75,10 @@ public class ShoppingCartService : IShoppingCartService
             {
                 if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                 {
-                    return new CartItemDto();
+                    return new CartItemViewModel();
                 }
 
-                return await response.Content.ReadFromJsonAsync<CartItemDto>() ?? new CartItemDto();
+                return await response.Content.ReadFromJsonAsync<CartItemViewModel>() ?? new CartItemViewModel();
             }
 
             var message = await response.Content.ReadAsStringAsync();
@@ -90,7 +90,7 @@ public class ShoppingCartService : IShoppingCartService
         }
     }
 
-    public async Task<CartItemDto> UpdateQtyAsync(int itemId, int newQty)
+    public async Task<CartItemViewModel> UpdateQtyAsync(int itemId, int newQty)
     {
         try
         {
@@ -102,10 +102,10 @@ public class ShoppingCartService : IShoppingCartService
             {
                 if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                 {
-                    return new CartItemDto();
+                    return new CartItemViewModel();
                 }
 
-                return await response.Content.ReadFromJsonAsync<CartItemDto>() ?? new CartItemDto();
+                return await response.Content.ReadFromJsonAsync<CartItemViewModel>() ?? new CartItemViewModel();
             }
 
             var message = await response.Content.ReadAsStringAsync();
